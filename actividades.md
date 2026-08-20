@@ -1,5 +1,17 @@
 # ACTIVIDADES DE APRENDIZAJE
 
+**Documentos Entregables**
+
+1. [Mapa mental de los tipos de SGBD](https://docs.google.com/document/d/1KqL1_9BubMvbNnK0_LWIxIbPS2PDnYPtbCHjR-pyer4/edit?usp=sharing)
+2. [Lluvia de ideas de los principales ataques](https://docs.google.com/document/d/1pZ1NsWe5rFLQ3-G7N08YdznHi9ifVFtwzGHCI44-syQ/edit?usp=sharing)
+3. [Tutorial de Instalación del SMBD Sql server]()
+4. [Cuestionario de la materia]()
+5. [Investigación de empresa para generar una base de datos]()
+6. [Investigación definición de nube, diferentes tipos servidores y principales empresas de que manejan aplicaciones en la nube]()
+7. [Consultas de la base de datos Video archivo (Consultas_BDvideo.jpg)]()
+8. [Investigación tipos de usuarios de sql server]()
+9. [Investigación de clúster, que son, tipos y diferencias]()
+
 **Evaluación no.1**
 **Materia:** Administración de Base de Datos.
 
