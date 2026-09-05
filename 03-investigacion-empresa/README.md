@@ -169,13 +169,13 @@ User: sa
 Password: YourStrong@Password123
 ```
 
-| Captura | Descripcion |
-|---------|-------------|
-| ![Tablas](capturas/1-tablas.png) | Tablas creadas en `BD_FIDELIZA` |
-| ![Cliente saldo](capturas/2-clientes-saldo.png) | Clientes por negocio con su saldo de puntos |
-| ![Top clientes](capturas/3-top-clientes.png) | Top de clientes con mas puntos acumulados |
-| ![Detalle canjes](capturas/4-detalle-canjes.png) | Detalle de canjes de recompensas |
-| ![Recompensas](capturas/5-recompensas.png) | Catalogo de recompensas por negocio |
+| Captura                                          | Descripcion                                 |
+| ------------------------------------------------ | ------------------------------------------- |
+| ![Tablas](capturas/1-tablas.png)                 | Tablas creadas en `BD_FIDELIZA`             |
+| ![Cliente saldo](capturas/2-clientes-saldo.png)  | Clientes por negocio con su saldo de puntos |
+| ![Top clientes](capturas/3-top-clientes.png)     | Top de clientes con mas puntos acumulados   |
+| ![Detalle canjes](capturas/4-detalle-canjes.png) | Detalle de canjes de recompensas            |
+| ![Recompensas](capturas/5-recompensas.png)       | Catalogo de recompensas por negocio         |
 
 ---
 
