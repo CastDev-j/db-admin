@@ -10,7 +10,7 @@ USE Torneo;
 GO
 
 CREATE TABLE Actividad (
-    cve_ac INT PRIMARY KEY,
+    cve_ac INT PRIMARY KEY NONCLUSTERED,
     Nom_act VARCHAR(100),
     lugar VARCHAR(100)
 );
