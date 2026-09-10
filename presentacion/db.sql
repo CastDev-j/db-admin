@@ -1,14 +1,16 @@
+-- ============================================================
 -- EQUIPO No. 3 | ADMINISTRACION DE BASES DE DATOS | SQL SERVER
--- db.sql - creacion de estructura para la practica
--- DB sencilla: TIENDA
--- Temas: Bitacora (3), Particiones (2)
+-- db.sql - practica completa (estructura + CUERIs)
+-- DB: TIENDA
+-- Temas: Bitacora (3), Particiones (2), Publicacion y Replica (1 c/u)
+-- ============================================================
 
 SET NOCOUNT ON;
 GO
 USE master;
 GO
 
--- Limpieza previa 
+-- Limpieza previa (re-ejecutable)
 IF DB_ID('Distribucion') IS NOT NULL BEGIN
     BEGIN TRY
         EXEC sp_dropdistributor @no_checks=1;
@@ -37,7 +39,7 @@ GO
 USE TIENDA;
 GO
 
--- Tablas
+-- Tablas sencillas de la tienda
 CREATE TABLE dbo.Producto (id_producto INT IDENTITY PRIMARY KEY, nombre VARCHAR(50) NOT NULL, precio DECIMAL(10,2) NOT NULL);
 GO
 
@@ -60,9 +62,9 @@ CREATE TABLE dbo.Pedido (id_pedido INT NOT NULL, monto INT NOT NULL,
     CONSTRAINT PK_Pedido PRIMARY KEY (id_pedido, monto));
 GO
 
--- =========== 1) TEMA: BITACORA ===========
+-- SECCION 1: TEMA BITACORA - 3 ejemplos
 
--- Ejemplo 1.1 - Bitacora con trigger (sobre Producto)
+-- ESTRUCTURA 1.1 - Bitacora con trigger (sobre Producto)
 CREATE TABLE dbo.BitacoraProducto (id_evento INT IDENTITY PRIMARY KEY, operacion VARCHAR(10), id_producto INT, nombre VARCHAR(50), precio DECIMAL(10,2), usuario SYSNAME, fecha DATETIME);
 GO
 
@@ -80,12 +82,24 @@ UPDATE dbo.Producto SET precio = 20.00 WHERE nombre = 'Refresco';
 DELETE FROM dbo.Producto WHERE nombre = 'Papas';
 GO
 
--- Ejemplo 1.2 - Bitacora con tabla temporal (historico automatico)
+-- CUERI 1.1 - Bitacora con trigger: ver que se registro
+SELECT operacion, id_producto, nombre, precio, usuario, fecha
+FROM   dbo.BitacoraProducto
+ORDER BY id_evento;
+GO
+
+-- ESTRUCTURA 1.2 - Bitacora con tabla temporal (historico automatico)
 INSERT INTO dbo.Empleado (id_empleado, nombre, sueldo) VALUES (1, 'Juan', 8500), (2, 'Ana', 9200);
 UPDATE dbo.Empleado SET sueldo = 9000 WHERE id_empleado = 1;
 GO
 
--- Ejemplo 1.3 - Bitacora de respaldos (historial en msdb)
+-- CUERI 1.2 - Bitacora con tabla temporal: ver todo el historial
+SELECT *
+FROM   dbo.Empleado
+FOR SYSTEM_TIME ALL;
+GO
+
+-- ESTRUCTURA 1.3 - Bitacora de respaldos (historial en msdb)
 ALTER DATABASE TIENDA SET RECOVERY FULL;
 GO
 BACKUP DATABASE TIENDA TO DISK = N'/var/opt/mssql/data/TIENDA_FULL.bak' WITH NAME = N'Full', INIT;
@@ -93,9 +107,19 @@ GO
 BACKUP LOG TIENDA TO DISK = N'/var/opt/mssql/data/TIENDA_LOG.bak' WITH NAME = N'Log', INIT;
 GO
 
--- =========== 2) TEMA: PARTICIONES ===========
+-- CUERI 1.3 - Bitacora de respaldos: ver historial en msdb
+SELECT bs.database_name,
+       CASE bs.type WHEN 'D' THEN 'COMPLETO' WHEN 'L' THEN 'LOG' END AS tipo,
+       bs.backup_start_date,
+       bmf.physical_device_name
+FROM   msdb.dbo.backupset bs
+INNER JOIN msdb.dbo.backupmediafamily bmf ON bs.media_set_id = bmf.media_set_id
+WHERE  bs.database_name = 'TIENDA';
+GO
 
--- Ejemplo 2.1 - Particion por fecha (tabla Venta)
+-- SECCION 2: TEMA PARTICIONES - 2 ejemplos
+
+-- ESTRUCTURA 2.1 - Particion por fecha (tabla Venta)
 CREATE PARTITION FUNCTION pf_Venta (datetime2(0)) AS RANGE RIGHT FOR VALUES ('2026-01-01');
 GO
 CREATE PARTITION SCHEME ps_Venta AS PARTITION pf_Venta TO ([PRIMARY], [PRIMARY]);
@@ -107,7 +131,21 @@ GO
 INSERT INTO dbo.Venta VALUES (1, '2025-03-14', 150), (2, '2025-11-02', 320), (3, '2026-02-20', 210), (4, '2026-07-08', 540);
 GO
 
--- Ejemplo 2.2 - Particion por rango numerico (tabla Pedido)
+-- CUERI 2.1 - Particion por fecha: filas en cada particion
+SELECT p.partition_number AS no_particion, p.rows AS filas
+FROM   sys.partitions p
+WHERE  p.object_id = OBJECT_ID('dbo.Venta')
+GROUP BY p.partition_number, p.rows
+ORDER BY p.partition_number;
+GO
+
+-- a que particion corresponde cada venta
+SELECT id_venta, fecha, monto,
+       CASE WHEN fecha < '2026-01-01' THEN 1 ELSE 2 END AS no_particion
+FROM   dbo.Venta;
+GO
+
+-- ESTRUCTURA 2.2 - Particion por rango numerico (tabla Pedido)
 CREATE PARTITION FUNCTION pf_Pedido (int) AS RANGE RIGHT FOR VALUES (100, 500);
 GO
 CREATE PARTITION SCHEME ps_Pedido AS PARTITION pf_Pedido TO ([PRIMARY], [PRIMARY], [PRIMARY]);
@@ -119,10 +157,18 @@ GO
 INSERT INTO dbo.Pedido VALUES (1, 50), (2, 120), (3, 420), (4, 800);
 GO
 
--- =========== 3) TEMA: PUBLICACION Y REPLICA ===========
--- Se publica la tabla Producto de TIENDA hacia TIENDA_COPIA
+-- CUERI 2.2 - Particion por rango numerico: filas por particion
+SELECT p.partition_number AS no_particion, p.rows AS filas
+FROM   sys.partitions p
+WHERE  p.object_id = OBJECT_ID('dbo.Pedido')
+GROUP BY p.partition_number, p.rows
+ORDER BY p.partition_number;
+GO
 
--- Ejemplo 3.1 - Publicacion (distribuidor + publicacion + articulo)
+-- SECCION 3: TEMA PUBLICACION Y REPLICA 
+-- Publica la tabla Producto de TIENDA hacia TIENDA_COPIA
+
+-- ESTRUCTURA 3.1 - Publicacion (distribuidor + publicacion + articulo)
 USE master;
 GO
 EXEC sp_adddistributor @distributor = N'sqlserver';
@@ -144,10 +190,17 @@ GO
 EXEC sp_addarticle @publication = N'PubProductos', @article = N'Producto', @source_object = N'Producto', @source_owner = N'dbo';
 GO
 
--- Ejemplo 3.2 - Replica (suscripcion push hacia TIENDA_COPIA)
+-- CUERI 3.1 - Publicacion: ver publicacion y sus articulos
+SELECT name AS publicacion, status FROM dbo.syspublications;
+SELECT name AS articulo FROM dbo.sysarticles;
+GO
+
+-- ESTRUCTURA 3.2 - Replica (suscripcion push hacia TIENDA_COPIA)
 EXEC sp_addsubscription @publication = N'PubProductos', @subscriber = N'sqlserver',
      @destination_db = N'TIENDA_COPIA', @subscription_type = N'push', @sync_type = N'automatic', @article = N'all';
 GO
 
-PRINT '=== db.sql terminado ===';
+-- CUERI 3.2 - Replica: ver la suscripcion creada
+SELECT srvname AS suscriptor, dest_db AS base_destino, subscription_type
+FROM   dbo.syssubscriptions;
 GO
