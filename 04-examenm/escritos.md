@@ -170,6 +170,3 @@ CREATE NONCLUSTERED INDEX IX_lugar ON Actividad (lugar);
 GO
 ```
 
----
-
-¿Necesitas que acorte o simplifique alguna respuesta más?
