@@ -39,7 +39,7 @@ GO
 USE TIENDA;
 GO
 
--- Tablas sencillas de la tienda
+-- Tablas
 CREATE TABLE dbo.Producto (id_producto INT IDENTITY PRIMARY KEY, nombre VARCHAR(50) NOT NULL, precio DECIMAL(10,2) NOT NULL);
 GO
 
