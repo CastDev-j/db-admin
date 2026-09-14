@@ -106,19 +106,19 @@
 
 ## SECCIÓN 2: INSTRUCCIONES SQL SERVER (Valor 10 pts)
 
-| # | Comando/Rol | Descripción |
-|---|-------------|-------------|
-| 1 | **sp_who** | Muestra qué usuarios están usando el servidor. |
-| 2 | **sp_help** | Muestra la estructura de una tabla. |
-| 3 | **sp_helptext** | Muestra el código de un procedimiento almacenado. |
-| 4 | **sp_helpuser** | Muestra los usuarios de una base de datos. |
-| | **sysadmin** | Puede realizar todas las actividades de configuración y mantenimiento. |
-| 5 | **setupadmin** | Puede agregar y quitar servidores vinculados. |
-| 6 | **securityadmin** | Administra inicios de sesión y permisos de servidor. |
-| 7 | **db_owner** o **ddladmin** | Puede ejecutar comandos DDL en una BD. |
-| 8 | **public** | No pueden leer datos de tablas de usuarios (permisos básicos). |
-| 9 | **ALTER LOGIN ... WITH DEFAULT_DATABASE =** | Especifica la BD predeterminada al inicio de sesión. |
-| 10 | **GRANT, DENY, REVOKE** | Administra permisos (conceder, denegar, revocar). |
+| #   | Comando/Rol                                 | Descripción                                                            |
+| --- | ------------------------------------------- | ---------------------------------------------------------------------- |
+| 1   | **sp_who**                                  | Muestra qué usuarios están usando el servidor.                         |
+| 2   | **sp_help**                                 | Muestra la estructura de una tabla.                                    |
+| 3   | **sp_helptext**                             | Muestra el código de un procedimiento almacenado.                      |
+| 4   | **sp_helpuser**                             | Muestra los usuarios de una base de datos.                             |
+|     | **sysadmin**                                | Puede realizar todas las actividades de configuración y mantenimiento. |
+| 5   | **setupadmin**                              | Puede agregar y quitar servidores vinculados.                          |
+| 6   | **securityadmin**                           | Administra inicios de sesión y permisos de servidor.                   |
+| 7   | **db_owner** o **ddladmin**                 | Puede ejecutar comandos DDL en una BD.                                 |
+| 8   | **public**                                  | No pueden leer datos de tablas de usuarios (permisos básicos).         |
+| 9   | **ALTER LOGIN ... WITH DEFAULT_DATABASE =** | Especifica la BD predeterminada al inicio de sesión.                   |
+| 10  | **GRANT, DENY, REVOKE**                     | Administra permisos (conceder, denegar, revocar).                      |
 
 ---
 
