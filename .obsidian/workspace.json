@@ -11,14 +11,14 @@
             "id": "d21a6a38db85a9cc",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "split-diff-view",
               "state": {
-                "file": "04-examenm/escritos.md",
-                "mode": "source",
-                "source": false
+                "aFile": "05-deny-revoke/01-setup.sql",
+                "bFile": "05-deny-revoke/01-setup.sql",
+                "aRef": ""
               },
-              "icon": "lucide-file",
-              "title": "escritos"
+              "icon": "diff",
+              "title": "Diff: 01-setup.sql  (Working Tree)"
             }
           }
         ]
@@ -199,6 +199,12 @@
   },
   "active": "d21a6a38db85a9cc",
   "lastOpenFiles": [
+    "04-examenm/escritos.md",
+    "05-deny-revoke/04-teardown.sql",
+    "05-deny-revoke/03-revoke.sql",
+    "05-deny-revoke/02-deny.sql",
+    "05-deny-revoke/01-setup.sql",
+    "05-deny-revoke",
     "03-investigacion-empresa/README.md",
     "03-investigacion-empresa/capturas/Pasted image 20260905141450.png",
     "Pasted image 20260905141450.png",
