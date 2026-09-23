@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "50ed522fcb41161a",
+        "id": "a8a53860a9970298",
         "type": "tabs",
         "children": [
           {
-            "id": "d21a6a38db85a9cc",
+            "id": "e16a64692c79db31",
             "type": "leaf",
             "state": {
-              "type": "split-diff-view",
+              "type": "markdown",
               "state": {
-                "aFile": "05-deny-revoke/01-setup.sql",
-                "bFile": "05-deny-revoke/01-setup.sql",
-                "aRef": ""
+                "file": "04-examenm/escritos.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "diff",
-              "title": "Diff: 01-setup.sql  (Working Tree)"
+              "icon": "lucide-file",
+              "title": "escritos"
             }
           }
         ]
@@ -197,7 +197,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d21a6a38db85a9cc",
+  "active": "e16a64692c79db31",
   "lastOpenFiles": [
     "04-examenm/escritos.md",
     "05-deny-revoke/04-teardown.sql",

@@ -68,12 +68,28 @@ GO
 CREATE TABLE dbo.BitacoraProducto (id_evento INT IDENTITY PRIMARY KEY, operacion VARCHAR(10), id_producto INT, nombre VARCHAR(50), precio DECIMAL(10,2), usuario SYSNAME, fecha DATETIME);
 GO
 
-CREATE TRIGGER dbo.trg_BitacoraProducto ON dbo.Producto AFTER INSERT, UPDATE, DELETE AS
+CREATE TRIGGER dbo.trg_BitacoraProducto 
+ON dbo.Producto 
+AFTER INSERT, UPDATE, DELETE 
+AS
 BEGIN
     SET NOCOUNT ON;
-    INSERT INTO dbo.BitacoraProducto SELECT 'INSERT', i.id_producto, i.nombre, i.precio, SUSER_SNAME(), GETDATE() FROM inserted i;
-    INSERT INTO dbo.BitacoraProducto SELECT 'UPDATE', i.id_producto, i.nombre, i.precio, SUSER_SNAME(), GETDATE() FROM inserted i INNER JOIN deleted d ON d.id_producto = i.id_producto;
-    INSERT INTO dbo.BitacoraProducto SELECT 'DELETE', d.id_producto, d.nombre, d.precio, SUSER_SNAME(), GETDATE() FROM deleted d;
+
+    IF EXISTS (SELECT 1 FROM inserted) AND EXISTS (SELECT 1 FROM deleted)
+        INSERT INTO dbo.BitacoraProducto
+        SELECT 'UPDATE', i.id_producto, i.nombre, i.precio, SUSER_SNAME(), GETDATE()
+        FROM inserted i
+        INNER JOIN deleted d ON d.id_producto = i.id_producto;
+
+    ELSE IF EXISTS (SELECT 1 FROM inserted)
+        INSERT INTO dbo.BitacoraProducto
+        SELECT 'INSERT', i.id_producto, i.nombre, i.precio, SUSER_SNAME(), GETDATE()
+        FROM inserted i;
+
+    ELSE
+        INSERT INTO dbo.BitacoraProducto
+        SELECT 'DELETE', d.id_producto, d.nombre, d.precio, SUSER_SNAME(), GETDATE()
+        FROM deleted d;
 END
 GO
 
