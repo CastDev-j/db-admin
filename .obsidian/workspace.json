@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "04-examenm/escritos.md",
+                "file": "03-investigacion-empresa/practica.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "escritos"
+              "title": "practica"
             }
           }
         ]
@@ -83,7 +83,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "cde4895c1aec207a",
@@ -199,6 +200,17 @@
   },
   "active": "e16a64692c79db31",
   "lastOpenFiles": [
+    "03-investigacion-empresa/capturas/Pasted image 20260928145755.png",
+    "03-investigacion-empresa/capturas/Pasted image 20260928145740.png",
+    "03-investigacion-empresa/capturas/Pasted image 20260928143722.png",
+    "03-investigacion-empresa/capturas/Pasted image 20260928143652.png",
+    "03-investigacion-empresa/capturas/Pasted image 20260928143614.png",
+    "03-investigacion-empresa/capturas/Pasted image 20260928143612.png",
+    "03-investigacion-empresa/capturas/Pasted image 20260928143550.png",
+    "03-investigacion-empresa/capturas/Pasted image 20260928143549.png",
+    "03-investigacion-empresa/capturas/Pasted image 20260928143508.png",
+    "03-investigacion-empresa/capturas/Pasted image 20260928143449.png",
+    "03-investigacion-empresa/capturas/Pasted image 20260928143432.png",
     "04-examenm/escritos.md",
     "05-deny-revoke/04-teardown.sql",
     "05-deny-revoke/03-revoke.sql",
@@ -206,13 +218,6 @@
     "05-deny-revoke/01-setup.sql",
     "05-deny-revoke",
     "03-investigacion-empresa/README.md",
-    "03-investigacion-empresa/capturas/Pasted image 20260905141450.png",
-    "Pasted image 20260905141450.png",
-    "03-investigacion-empresa/capturas/5-recompensas.png",
-    "03-investigacion-empresa/capturas/4-detalle-canjes.png",
-    "03-investigacion-empresa/capturas/3-top-clientes.png",
-    "03-investigacion-empresa/capturas/2-clientes-saldo.png",
-    "03-investigacion-empresa/capturas/1-tablas.png",
     "03-investigacion-empresa/capturas",
     "03-investigacion-empresa/estructura-proyecto.md",
     "actividad-6-nube-servidores.md",
