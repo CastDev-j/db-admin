@@ -69,10 +69,11 @@ GROUP BY n.nombre;
 
 -- 9.- Usuarios autorizados por negocio y rol
 
-SELECT n.nombre AS negocio, u.nombre, u.rol
+SELECT n.nombre AS negocio, u.nombre, r.nombre AS rol, r.nivel_acceso
 FROM usuario u
 INNER JOIN negocio n ON u.id_negocio = n.id_negocio
-ORDER BY n.nombre, u.rol;
+INNER JOIN rol r ON u.id_rol = r.id_rol
+ORDER BY n.nombre, r.nivel_acceso DESC;
 
 -- 10.- Catálogo de recompensas vigentes por negocio
 
@@ -81,3 +82,49 @@ FROM recompensa r
 INNER JOIN negocio n ON r.id_negocio = n.id_negocio
 WHERE r.fecha_fin IS NULL OR r.fecha_fin >= GETDATE()
 ORDER BY n.nombre, r.costo_puntos;
+
+-- 11.- Catálogo de roles del portal con su nivel de acceso
+
+SELECT nombre AS rol, nivel_acceso, descripcion
+FROM rol
+ORDER BY nivel_acceso DESC;
+
+-- 12.- Qué sucursales tiene asignadas cada operador
+
+SELECT n.nombre AS negocio, u.nombre AS operador, r.nombre AS rol, s.nombre AS sucursal
+FROM usuario_sucursal us
+INNER JOIN usuario u ON us.id_usuario = u.id_usuario
+INNER JOIN rol r ON u.id_rol = r.id_rol
+INNER JOIN sucursal s ON us.id_sucursal = s.id_sucursal
+INNER JOIN negocio n ON u.id_negocio = n.id_negocio
+ORDER BY n.nombre, u.nombre, s.nombre;
+
+-- 13.- Sesiones abiertas y si siguen vigentes al momento de la consulta
+
+SELECT u.nombre AS usuario, r.nombre AS rol, s.token, s.dispositivo, s.navegador,
+       s.direccion_ip, s.fecha_inicio, s.fecha_expiracion,
+       CASE WHEN s.fecha_expiracion > GETDATE() THEN 'VIGENTE' ELSE 'CADUCADA' END AS estado
+FROM sesion s
+INNER JOIN usuario u ON s.id_usuario = u.id_usuario
+INNER JOIN rol r ON u.id_rol = r.id_rol
+WHERE s.activa = 1
+ORDER BY s.fecha_inicio DESC;
+
+-- 14.- Historial de sesiones de un operador con su duración
+
+SELECT u.nombre AS usuario, s.dispositivo, s.navegador, s.fecha_inicio,
+       ISNULL(s.fecha_cierre, s.fecha_expiracion) AS fin,
+       DATEDIFF(MINUTE, s.fecha_inicio, ISNULL(s.fecha_cierre, s.fecha_expiracion)) AS minutos
+FROM sesion s
+INNER JOIN usuario u ON s.id_usuario = u.id_usuario
+ORDER BY s.fecha_inicio DESC;
+
+-- 15.- Operadores que registraron movimientos y su rol
+
+SELECT r.nombre AS rol, MAX(r.nivel_acceso) AS nivel_acceso, u.nombre AS operador,
+       COUNT(t.id_transaccion) AS movimientos, SUM(t.puntos) AS puntos_gestionados
+FROM transaccion_puntos t
+INNER JOIN usuario u ON t.id_usuario = u.id_usuario
+INNER JOIN rol r ON u.id_rol = r.id_rol
+GROUP BY r.nombre, u.nombre
+ORDER BY nivel_acceso DESC, movimientos DESC;
