@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "a8a53860a9970298",
+        "id": "cd0481f6e9b58751",
         "type": "tabs",
         "children": [
           {
-            "id": "e16a64692c79db31",
+            "id": "bbd75cd6e30b9198",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "03-investigacion-empresa/practica.md",
+                "file": "06-actividades/actividad-6.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "practica"
+              "title": "actividad-6"
             }
           }
         ]
@@ -83,8 +83,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "cde4895c1aec207a",
@@ -184,7 +183,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 299.9000244140625
+    "width": 299.9000244140625,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -198,19 +198,28 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "e16a64692c79db31",
+  "active": "bbd75cd6e30b9198",
   "lastOpenFiles": [
-    "03-investigacion-empresa/capturas/Pasted image 20260928145755.png",
-    "03-investigacion-empresa/capturas/Pasted image 20260928145740.png",
-    "03-investigacion-empresa/capturas/Pasted image 20260928143722.png",
-    "03-investigacion-empresa/capturas/Pasted image 20260928143652.png",
-    "03-investigacion-empresa/capturas/Pasted image 20260928143614.png",
-    "03-investigacion-empresa/capturas/Pasted image 20260928143612.png",
-    "03-investigacion-empresa/capturas/Pasted image 20260928143550.png",
-    "03-investigacion-empresa/capturas/Pasted image 20260928143549.png",
-    "03-investigacion-empresa/capturas/Pasted image 20260928143508.png",
-    "03-investigacion-empresa/capturas/Pasted image 20260928143449.png",
-    "03-investigacion-empresa/capturas/Pasted image 20260928143432.png",
+    "Pasted image 20261007223440.png",
+    "Pasted image 20261007223429.png",
+    "Pasted image 20261007223413.png",
+    "Pasted image 20261007223401.png",
+    "Pasted image 20261007223354.png",
+    "Pasted image 20261007223343.png",
+    "Pasted image 20261007223329.png",
+    "Pasted image 20261007223315.png",
+    "Pasted image 20261007223234.png",
+    "06-actividades/actividad-5.md",
+    "Pasted image 20261007222711.png",
+    "Pasted image 20261007222659.png",
+    "06-actividades/actividad-4.md",
+    "06-actividades/actividad-3.md",
+    "06-actividades/actividad-2.md",
+    "actividades.md",
+    "06-actividades/actividad-6.md",
+    "06-actividades",
+    "03-investigacion-empresa/practica.md",
+    "base.sql",
     "04-examenm/escritos.md",
     "05-deny-revoke/04-teardown.sql",
     "05-deny-revoke/03-revoke.sql",
